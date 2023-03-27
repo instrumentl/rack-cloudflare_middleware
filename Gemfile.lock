@@ -108,6 +108,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   bundle-audit (~> 0.1.0)
