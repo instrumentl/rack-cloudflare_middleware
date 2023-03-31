@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "faraday", "~> 1.0"
+gem "faraday", "~> 2.7"
 gem "rake", "~> 13.0"
 
 group :development, :test do
