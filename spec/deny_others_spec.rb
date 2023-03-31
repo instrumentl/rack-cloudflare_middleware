@@ -57,10 +57,10 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
     end
   end
 
-  context "on_fail_proc provded" do
+  context "on_fail_proc provided" do
     let(:middleware_kwargs) { {allow_private: false, on_fail_proc: ->(env) { [600, {"Content-Type" => "text/plain"}, [env["HTTP_X_FOOBAR"]]] }} }
 
-    it "calls on_fail_proc if one is provided" do
+    it "calls on_fail_proc" do
       get "/", nil, {"REMOTE_ADDR" => "127.0.0.1", "HTTP_X_FOOBAR" => "baz"}
       expect(last_response.status).to eq 600
       expect(last_response.body).to eq "baz"
