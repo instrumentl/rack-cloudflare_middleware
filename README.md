@@ -27,3 +27,14 @@ run Sinatra::Application
 ```
 
 The `allow_private` kwarg to `DenyOthers` controls whether or not private and loopback addresses are allowed through. Whether or not you should set this depends on the exact specifics of your deployment environment; often it should be set in development, but not in production.
+
+`DenyOthers` also takes an `on_fail_proc` kwarg which receives the request environment and should return an appropriate error response (as a standard Rack tuple of `(status, headers, body)`). Example usage:
+
+```ruby
+require "rack/cloudflare_middleware"
+
+use Rack::CloudflareMiddleware::DenyOthers, on_fail_proc: ->(env) do
+  MyLogger.warn "Bad request from #{env["REMOTE_ADDR"]}"
+  [403, {"Content-Type" => "text/plain"}, ["you did a bad thing"]]
+end
+```
