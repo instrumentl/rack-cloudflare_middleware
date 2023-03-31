@@ -67,6 +67,25 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
     end
   end
 
+  context "trust_xff_if_private = true" do
+    let(:middleware_kwargs) { {trust_xff_if_private: true, allow_private: false} }
+
+    it "blocks requests with no xff" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1"}
+      expect(last_response.status).to eq 403
+    end
+
+    it "blocks requests with invalid XFF" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8"}
+      expect(last_response.status).to eq 403
+    end
+
+    it "allows requests with a valid last XFF and private remote addr" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8,1.2.3.4"}
+      expect(last_response.status).to eq 200
+    end
+  end
+
   context "allow_private = false" do
     let(:allow_private) { false }
 
