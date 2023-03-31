@@ -10,7 +10,7 @@ module Rack
 
       def call(env)
         TrustedIps.instance.check_update
-        remote_addr = RemoteAddr.get_remote_addr(env, @trust_xff_if_private)
+        remote_addr = Rack::CloudflareMiddleware.get_remote_addr(env, @trust_xff_if_private)
         if TrustedIps.instance.include? remote_addr
           unless env["HTTP_CF_CONNECTING_IP"].nil?
             env["HTTP_CF_ORIGINAL_REMOTE_ADDR"] = remote_addr

@@ -12,7 +12,7 @@ module Rack
 
       def call(env)
         TrustedIps.instance.check_update
-        remote_addr = RemoteAddr.get_remote_addr(env, @trust_xff_if_private)
+        remote_addr = Rack::CloudflareMiddleware.get_remote_addr(env, @trust_xff_if_private)
         if (@allow_private && (remote_addr.private? || remote_addr.loopback?)) || TrustedIps.instance.include?(remote_addr)
           @app.call(env)
         elsif @on_fail_proc.nil?
