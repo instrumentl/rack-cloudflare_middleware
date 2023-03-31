@@ -2,6 +2,8 @@
 
 require "spec_helper"
 
+require "rack/builder"
+
 class OkApplication
   def call(env)
     ["200", {"Content-Type" => "text/plain"}, ["OK"]]
