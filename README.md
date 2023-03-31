@@ -1,5 +1,8 @@
 This is a small Rack middleware for use with the [Cloudflare](https://www.cloudflare.com/) CDN.
 
+[![CI](https://github.com/instrumentl/rack-cloudflare_middleware/actions/workflows/ci.yml/badge.svg)](https://github.com/instrumentl/rack-cloudflare_middleware/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/rack-cloudflare_middleware.svg)](https://badge.fury.io/rb/rack-cloudflare_middleware)
+
 We include two middlewares:
 
  * `Rack::CloudflareMiddleware::RewriteRemoteAddr` swaps in `CF-Connecting-IP` for `REMOTE_ADDR` if and only if the "real" remote address is a trusted Cloudflare source IP address.
