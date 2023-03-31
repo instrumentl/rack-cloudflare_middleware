@@ -27,3 +27,16 @@ run Sinatra::Application
 ```
 
 The `allow_private` kwarg to `DenyOthers` controls whether or not private and loopback addresses are allowed through. Whether or not you should set this depends on the exact specifics of your deployment environment; often it should be set in development, but not in production.
+
+`DenyOthers` also takes an `on_fail_proc` kwarg which receives the request environment and should return an appropriate error response (as a standard Rack tuple of `(status, headers, body)`). Example usage:
+
+```ruby
+require "rack/cloudflare_middleware"
+
+use Rack::CloudflareMiddleware::DenyOthers, on_fail_proc: ->(env) do
+  MyLogger.warn "Bad request from #{env["REMOTE_ADDR"]}"
+  [403, {"Content-Type" => "text/plain"}, ["you did a bad thing"]]
+end
+```
+
+Both middlewares also include a convenience called `trust_xff_if_private` mode; this will change them to use the right-most contents of `X-Forwarded-For` as `REMOTE_ADDR` if and only if the actual `REMOTE_ADDR` is a private address. This is a moderately-unsafe option, but may be required if your application provider has made poor choices in routing technologies (and, for example, is required on Heroku). If you're in this state, you should tell your provider to use the PROXY protocol internally instead of `X-Forwarded-For`. There have been many security issues related to Heroku's poor parsing of `X-Forwarded-For` in their router/load-balancer layer, and may be more in the future.

@@ -12,6 +12,7 @@ end
 
 RSpec.describe Rack::CloudflareMiddleware::RewriteRemoteAddr do
   let(:tips) { Rack::CloudflareMiddleware::TrustedIps.instance }
+  let(:middleware_kwargs) { {} }
 
   before do
     tips.reset!
@@ -23,7 +24,7 @@ RSpec.describe Rack::CloudflareMiddleware::RewriteRemoteAddr do
   end
 
   let(:app) do
-    described_class.new(EchoApplication.new)
+    described_class.new(EchoApplication.new, **middleware_kwargs)
   end
 
   let(:parsed) { JSON.parse(last_response.body) }
@@ -48,5 +49,24 @@ RSpec.describe Rack::CloudflareMiddleware::RewriteRemoteAddr do
       "HTTP_CF_CONNECTING_IP" => "8.8.8.8",
       "HTTP_CF_ORIGINAL_REMOTE_ADDR" => "1.2.3.1"
     })
+  end
+
+  context "trust_xff_if_private = true" do
+    let(:middleware_kwargs) { {trust_xff_if_private: true} }
+
+    it "does nothing if xff is absent" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1"}
+      expect(parsed).to eq({"REMOTE_ADDR" => "10.1.1.1"})
+    end
+
+    it "does nothing if invalid XFF" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8"}
+      expect(parsed).to eq({"REMOTE_ADDR" => "10.1.1.1"})
+    end
+
+    it "rewrites REMOTE_ADDR if valid XFF" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8,1.2.3.4", "HTTP_CF_CONNECTING_IP" => "8.8.8.8"}
+      expect(parsed).to eq({"HTTP_CF_CONNECTING_IP" => "8.8.8.8", "HTTP_CF_ORIGINAL_REMOTE_ADDR" => "1.2.3.4", "REMOTE_ADDR" => "8.8.8.8"})
+    end
   end
 end

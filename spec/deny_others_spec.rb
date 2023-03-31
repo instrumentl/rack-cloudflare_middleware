@@ -22,8 +22,10 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
     tips.update!
   end
 
+  let(:middleware_kwargs) { {allow_private: allow_private} }
+
   let(:app) do
-    kwargs = {allow_private: allow_private}
+    kwargs = middleware_kwargs
     Rack::Builder.new do
       use Rack::CloudflareMiddleware::DenyOthers, **kwargs
       run OkApplication.new
@@ -43,9 +45,44 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
       expect(last_response).to be_successful
     end
 
+    it "allows trusted IPv6 connections" do
+      get "/", nil, {"REMOTE_ADDR" => "2001:2003:2003:2004::10"}
+      expect(last_response).to be_successful
+    end
+
     it "blocks untrusted connections" do
       get "/", nil, {"REMOTE_ADDR" => "9.9.9.9"}
       expect(last_response.status).to eq 403
+      expect(last_response.body).to eq "Forbidden by policy statement (9.9.9.9)"
+    end
+  end
+
+  context "on_fail_proc provided" do
+    let(:middleware_kwargs) { {allow_private: false, on_fail_proc: ->(env) { [600, {"Content-Type" => "text/plain"}, [env["HTTP_X_FOOBAR"]]] }} }
+
+    it "calls on_fail_proc" do
+      get "/", nil, {"REMOTE_ADDR" => "127.0.0.1", "HTTP_X_FOOBAR" => "baz"}
+      expect(last_response.status).to eq 600
+      expect(last_response.body).to eq "baz"
+    end
+  end
+
+  context "trust_xff_if_private = true" do
+    let(:middleware_kwargs) { {trust_xff_if_private: true, allow_private: false} }
+
+    it "blocks requests with no xff" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1"}
+      expect(last_response.status).to eq 403
+    end
+
+    it "blocks requests with invalid XFF" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8"}
+      expect(last_response.status).to eq 403
+    end
+
+    it "allows requests with a valid last XFF and private remote addr" do
+      get "/", nil, {"REMOTE_ADDR" => "10.1.1.1", "HTTP_X_FORWARDED_FOR" => "8.8.8.8,1.2.3.4"}
+      expect(last_response.status).to eq 200
     end
   end
 
@@ -59,6 +96,11 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
 
     it "allows trusted connections" do
       get "/", nil, {"REMOTE_ADDR" => "1.2.3.1"}
+      expect(last_response).to be_successful
+    end
+
+    it "allows trusted IPv6 connections" do
+      get "/", nil, {"REMOTE_ADDR" => "2001:2003:2003:2004::10"}
       expect(last_response).to be_successful
     end
 
