@@ -1,3 +1,7 @@
+NEXT
+----
+- Set `required_ruby_version` in the gemspec
+
 v1.1.0 - 2023-03-31
 -------------------
 - Expand requirements to allow using Rack 3.x
