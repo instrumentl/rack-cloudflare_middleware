@@ -3,8 +3,9 @@
 module Rack
   module CloudflareMiddleware
     class DenyOthers
-      def initialize(app, allow_private: false, on_fail_proc: nil, trust_xff_if_private: false)
+      def initialize(app, allow_private: false, trusted_request_proc: nil, on_fail_proc: nil, trust_xff_if_private: false)
         @allow_private = allow_private
+        @trusted_request_proc = trusted_request_proc
         @on_fail_proc = on_fail_proc
         @trust_xff_if_private = trust_xff_if_private
         @app = app
@@ -13,7 +14,7 @@ module Rack
       def call(env)
         TrustedIps.instance.check_update
         remote_addr = Rack::CloudflareMiddleware.get_remote_addr(env, @trust_xff_if_private)
-        if (@allow_private && (remote_addr.private? || remote_addr.loopback?)) || TrustedIps.instance.include?(remote_addr)
+        if (@allow_private && (remote_addr.private? || remote_addr.loopback?)) || TrustedIps.instance.include?(remote_addr) || @trusted_request_proc&.call(Rack::Request.new(env))
           @app.call(env)
         elsif @on_fail_proc.nil?
           default_on_fail(remote_addr)

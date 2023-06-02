@@ -42,4 +42,13 @@ use Rack::CloudflareMiddleware::DenyOthers, on_fail_proc: ->(env) do
 end
 ```
 
+`DenyOthers` also takes a `trusted_request_proc` which receives a `Rack::Request` object and should return a boolean of whether or not the request is to be allowed through regardless of Source IP. This is primarily intended for healthchecks. Example usage:
+
+```ruby
+require "rack/cloudflare_middleware"
+use Rack::CloudflareMiddleware::DenyOthers, trusted_request_proc: ->(request) do
+  request.path.start_with? "/health/check"
+end
+```
+
 Both middlewares also include a convenience called `trust_xff_if_private` mode; this will change them to use the right-most contents of `X-Forwarded-For` as `REMOTE_ADDR` if and only if the actual `REMOTE_ADDR` is a private address. This is a moderately-unsafe option, but may be required if your application provider has made poor choices in routing technologies (and, for example, is required on Heroku). If you're in this state, you should tell your provider to use the PROXY protocol internally instead of `X-Forwarded-For`. There have been many security issues related to Heroku's poor parsing of `X-Forwarded-For` in their router/load-balancer layer, and may be more in the future.
