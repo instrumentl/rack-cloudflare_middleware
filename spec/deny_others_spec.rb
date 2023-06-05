@@ -67,6 +67,20 @@ RSpec.describe Rack::CloudflareMiddleware::DenyOthers do
     end
   end
 
+  context "trusted_request_proc provided" do
+    let(:middleware_kwargs) { {allow_private: false, trusted_request_proc: ->(request) { request.path.start_with? "/health" }} }
+
+    it "allows requests to /health/foo" do
+      get "/health/foo", nil, {"REMOTE_ADDR" => "127.0.0.1"}
+      expect(last_response.status).to eq 200
+    end
+
+    it "still disallows other requests" do
+      get "/evil/baz", nil, {"REMOTE_ADDR" => "127.0.0.1"}
+      expect(last_response.status).to eq 403
+    end
+  end
+
   context "trust_xff_if_private = true" do
     let(:middleware_kwargs) { {trust_xff_if_private: true, allow_private: false} }
 
