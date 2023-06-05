@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-cloudflare_middleware (1.1.0)
+    rack-cloudflare_middleware (1.2.0)
       faraday (>= 1.0, < 3)
       rack (>= 2, < 4)
 
