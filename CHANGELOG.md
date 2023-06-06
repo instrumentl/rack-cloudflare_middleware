@@ -1,6 +1,7 @@
-NEXT
-----
+v1.2.0 - 2023-06-05
+-------------------
 - Set `required_ruby_version` in the gemspec
+- Add `trusted_request_proc` kwarg to DenyOthers middleware
 
 v1.1.0 - 2023-03-31
 -------------------
