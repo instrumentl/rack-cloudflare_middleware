@@ -13,6 +13,6 @@ group :development, :test do
   gem "rack-test", "~> 2"
   gem "standard", "~> 1"
   gem "pry"
-  gem "webmock", "~> 3.18"
+  gem "webmock", "~> 3.19"
   gem "bundle-audit", "~> 0.1.0"
 end
