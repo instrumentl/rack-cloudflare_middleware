@@ -12,6 +12,6 @@ repos:
     exclude: '^spec/data/'
   - id: check-merge-conflict
 - repo: https://github.com/instrumentl/pre-commit-standardrb.git
-  rev: 'b9c5657a92bcc2ebfa9ec295754b0c56877fbed8'
+  rev: 'v1.34.0'
   hooks:
     - id: standardrb
