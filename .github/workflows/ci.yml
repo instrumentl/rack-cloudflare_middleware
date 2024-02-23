@@ -48,4 +48,4 @@ jobs:
         with:
           python-version: "3.10"
       - name: Run pre-commit
-        uses: pre-commit/action@5f528da5c95691c4cf42ff76a4d10854b62cbb82
+        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd
