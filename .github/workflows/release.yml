@@ -12,7 +12,7 @@ jobs:
         uses: ruby/setup-ruby@d4526a55538b775af234ba4af27118ed6f8f6677
         with:
           bundler-cache: true
-          ruby-version: "3.2"
+          ruby-version: "3.3"
       - name: Publish gem
         run: |
           umask 077
