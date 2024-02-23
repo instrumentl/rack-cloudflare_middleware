@@ -10,6 +10,8 @@ updates:
     schedule:
       interval: "weekly"
       day: "wednesday"
+    reviewers:
+      - instrumentl/code-reviewers
     labels:
       - ":robot: dependabot"
       - ":octocat: github-actions"
@@ -23,3 +25,5 @@ updates:
       - ":robot: dependabot"
       - ":gem: ruby"
       - ":heavy_plus_sign: dependencies"
+    reviewers:
+      - instrumentl/code-reviewers
