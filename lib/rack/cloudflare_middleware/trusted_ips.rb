@@ -40,8 +40,8 @@ module Rack
       end
 
       def update!
-        read_network "https://www.cloudflare.com/ips-v4", 4
-        read_network "https://www.cloudflare.com/ips-v6", 6
+        read_network "https://www.cloudflare.com/ips-v4/", 4
+        read_network "https://www.cloudflare.com/ips-v6/", 6
       end
 
       def check_update
