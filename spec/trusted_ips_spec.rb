@@ -11,9 +11,9 @@ RSpec.describe Rack::CloudflareMiddleware::TrustedIps do
 
   describe "#include?" do
     before do
-      stub_request(:get, "https://www.cloudflare.com/ips-v4")
+      stub_request(:get, "https://www.cloudflare.com/ips-v4/")
         .to_return(status: 200, body: "1.2.3.0/24\n255.255.255.255/32\n\n")
-      stub_request(:get, "https://www.cloudflare.com/ips-v6")
+      stub_request(:get, "https://www.cloudflare.com/ips-v6/")
         .to_return(status: 200, body: "2001:2003:2003:2004::/64")
       instance.update!
     end
@@ -28,9 +28,9 @@ RSpec.describe Rack::CloudflareMiddleware::TrustedIps do
 
   describe "#update!" do
     it "works" do
-      s1 = stub_request(:get, "https://www.cloudflare.com/ips-v4")
+      s1 = stub_request(:get, "https://www.cloudflare.com/ips-v4/")
         .to_return(status: 200, body: "1.2.3.0/24\n255.255.255.255/32\n\n")
-      s2 = stub_request(:get, "https://www.cloudflare.com/ips-v6")
+      s2 = stub_request(:get, "https://www.cloudflare.com/ips-v6/")
         .to_return(status: 200, body: "2001:2003:2003:2004::/64")
       expect(instance.include?("1.2.3.1")).to eq false
       instance.update!
@@ -40,9 +40,9 @@ RSpec.describe Rack::CloudflareMiddleware::TrustedIps do
     end
 
     it "does nothing but warn on error" do
-      s1 = stub_request(:get, "https://www.cloudflare.com/ips-v4")
+      s1 = stub_request(:get, "https://www.cloudflare.com/ips-v4/")
         .to_return(status: 500)
-      s2 = stub_request(:get, "https://www.cloudflare.com/ips-v6")
+      s2 = stub_request(:get, "https://www.cloudflare.com/ips-v6/")
         .to_return(status: 500)
       expect(instance).to receive(:warn).twice
       expect(instance.include?("1.2.3.1")).to eq false

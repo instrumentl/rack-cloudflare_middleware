@@ -16,9 +16,9 @@ RSpec.describe Rack::CloudflareMiddleware::RewriteRemoteAddr do
 
   before do
     tips.reset!
-    stub_request(:get, "https://www.cloudflare.com/ips-v4")
+    stub_request(:get, "https://www.cloudflare.com/ips-v4/")
       .to_return(status: 200, body: "1.2.3.0/24\n255.255.255.255/32\n\n")
-    stub_request(:get, "https://www.cloudflare.com/ips-v6")
+    stub_request(:get, "https://www.cloudflare.com/ips-v6/")
       .to_return(status: 200, body: "2001:2003:2003:2004::/64")
     tips.update!
   end
