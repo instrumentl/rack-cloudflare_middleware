@@ -1,3 +1,8 @@
+v1.2.1 - 2024-02-23
+-------------------
+- Update cloudflare trusted IP URL to include new required trailing slash
+- Many dependabot bumps
+
 v1.2.0 - 2023-06-05
 -------------------
 - Set `required_ruby_version` in the gemspec
