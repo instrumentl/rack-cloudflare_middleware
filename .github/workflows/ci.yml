@@ -19,7 +19,7 @@ jobs:
         ruby: ["2.7", "3.0", "3.1", "3.2", "3.3"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
         with:
@@ -35,7 +35,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
         with:
