@@ -9,7 +9,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
+        uses: ruby/setup-ruby@3783f195e29b74ae398d7caca108814bbafde90e
         with:
           bundler-cache: true
           ruby-version: "3.3"
