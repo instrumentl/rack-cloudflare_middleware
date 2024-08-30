@@ -1,3 +1,7 @@
+NEXT
+----
+- Drop support for Ruby 2.x
+
 v1.2.1 - 2024-02-23
 -------------------
 - Update cloudflare trusted IP URL to include new required trailing slash
