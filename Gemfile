@@ -14,5 +14,5 @@ group :development, :test do
   gem "standard", "~> 1"
   gem "pry"
   gem "webmock", "~> 3.19"
-  gem "bundler-audit", "~> 0.9.0"
+  gem "bundler-audit", "~> 0.9.2"
 end
