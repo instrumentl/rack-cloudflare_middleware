@@ -1,6 +1,6 @@
 NEXT
 ----
-- Drop support for Ruby 2.x
+- Drop support for Ruby <3.1
 
 v1.2.1 - 2024-02-23
 -------------------
