@@ -32,4 +32,3 @@ jobs:
           REVIEWER: instrumentl/infrastructure
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           GH_REPO: ${{github.repository}}
-          
