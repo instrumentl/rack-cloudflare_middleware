@@ -1,4 +1,8 @@
 
+v1.2.4 - 2026-02-10
+-------------------
+- Updated Faraday dependency to >= 2.14.1 to address CVE-2026-25765 (SSRF vulnerability)
+
 v1.2.3 - 2025-07-25
 -------------------
 - Libraries updates
