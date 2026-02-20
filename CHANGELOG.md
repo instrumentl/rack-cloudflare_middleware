@@ -1,4 +1,12 @@
 
+v2.0.0 - 2026-02-19
+-------------------
+- **BREAKING CHANGE**: Dropped support for Ruby 3.1 (EOL as of March 31, 2025)
+- Updated minimum Ruby version requirement from >= 3.1 to >= 3.2
+- This change resolves Dependabot dependency resolution issues with bundler-audit
+- CI now tests against Ruby 3.2, 3.3, and 3.4
+- First major version bump following semantic versioning for breaking changes
+
 v1.2.4 - 2026-02-10
 -------------------
 - Updated Faraday dependency to >= 2.14.1 to address CVE-2026-25765 (SSRF vulnerability)
