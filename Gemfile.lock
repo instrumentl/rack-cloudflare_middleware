@@ -116,6 +116,7 @@ PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
   arm64-darwin-24
+  arm64-darwin-25
   x86_64-linux
 
 DEPENDENCIES
@@ -125,8 +126,8 @@ DEPENDENCIES
   pry
   rack-cloudflare_middleware!
   rack-test (~> 2)
-  rake (~> 13.3, ~> 13.0)
-  rspec (~> 3.13, ~> 3.0)
+  rake (~> 13.3)
+  rspec (~> 3.13)
   rspec-its (~> 2.0)
   standard (~> 1)
   webmock (~> 3.26)
