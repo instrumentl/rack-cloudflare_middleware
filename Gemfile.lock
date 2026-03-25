@@ -8,10 +8,10 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
+    addressable (2.8.9)
+      public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
-    bigdecimal (3.3.1)
+    bigdecimal (4.0.1)
     bundler-audit (0.9.3)
       bundler (>= 1.2.0)
       thor (~> 1.0)
@@ -44,7 +44,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
       reline (>= 0.6.0)
-    public_suffix (6.0.2)
+    public_suffix (7.0.5)
     racc (1.8.1)
     rack (3.2.5)
     rack-test (2.2.0)
@@ -107,7 +107,7 @@ GEM
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
     uri (1.1.1)
-    webmock (3.26.1)
+    webmock (3.26.2)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -126,8 +126,8 @@ DEPENDENCIES
   pry
   rack-cloudflare_middleware!
   rack-test (~> 2)
-  rake (~> 13.3)
-  rspec (~> 3.13)
+  rake (~> 13.3, ~> 13.0)
+  rspec (~> 3.13, ~> 3.0)
   rspec-its (~> 2.0)
   standard (~> 1)
   webmock (~> 3.26)
