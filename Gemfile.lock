@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-cloudflare_middleware (2.0.0)
+    rack-cloudflare_middleware (2.0.1)
       faraday (>= 1.0, < 3)
       rack (>= 2, < 4)
 
@@ -133,4 +133,4 @@ DEPENDENCIES
   webmock (~> 3.26)
 
 BUNDLED WITH
-   2.5.23
+   2.7.2
