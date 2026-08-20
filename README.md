@@ -5,8 +5,8 @@ This is a small Rack middleware for use with the [Cloudflare](https://www.cloudf
 
 We include two middlewares:
 
- * `Rack::CloudflareMiddleware::RewriteRemoteAddr` swaps in `CF-Connecting-IP` for `REMOTE_ADDR` if and only if the "real" remote address is a trusted Cloudflare source IP address.
- * `Rack::CloudflareMiddleware::DenyOthers` returns a 401 for all requests where `REMOTE_ADDR` is not Cloudflare
+- `Rack::CloudflareMiddleware::RewriteRemoteAddr` swaps in `CF-Connecting-IP` for `REMOTE_ADDR` if and only if the "real" remote address is a trusted Cloudflare source IP address.
+- `Rack::CloudflareMiddleware::DenyOthers` returns a 401 for all requests where `REMOTE_ADDR` is not Cloudflare
 
 If you're using Rails, you may want to use [cloudflare-rails](https://github.com/modosc/cloudflare-rails) instead.
 
