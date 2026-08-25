@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack-cloudflare_middleware (2.0.0)
+    rack-cloudflare_middleware (3.0.0)
       faraday (>= 1.0, < 3)
       rack (>= 2, < 4)
 
@@ -35,7 +35,7 @@ GEM
     method_source (1.1.0)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    parallel (1.28.0)
+    parallel (2.1.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
@@ -133,4 +133,4 @@ DEPENDENCIES
   webmock (~> 3.26)
 
 BUNDLED WITH
-   2.5.23
+   2.7.2

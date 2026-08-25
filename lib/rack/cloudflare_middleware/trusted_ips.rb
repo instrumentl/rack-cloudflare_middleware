@@ -33,9 +33,9 @@ module Rack
           ip = IPAddr.new(ip)
         end
         if ip.ipv4?
-          @ranges[4].any? { _1.include? ip }
+          @ranges[4].any? { it.include? ip }
         else
-          @ranges[6].any? { _1.include? ip }
+          @ranges[6].any? { it.include? ip }
         end
       end
 
@@ -45,7 +45,7 @@ module Rack
       end
 
       def check_update
-        if [4, 6].any? { (Time.now - @mtimes[_1]) > UPDATE_THRESHOLD }
+        if [4, 6].any? { (Time.now - @mtimes[it]) > UPDATE_THRESHOLD }
           update!
         end
       end
@@ -58,7 +58,7 @@ module Rack
       end
 
       def process_body(body)
-        body.lines.map(&:strip).filter { !_1.empty? }.map(&IPAddr.method(:new)).to_set
+        body.lines.map(&:strip).filter { !it.empty? }.map(&IPAddr.method(:new)).to_set
       end
 
       def read_file(path, version)

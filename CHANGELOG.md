@@ -1,41 +1,49 @@
+# changelog
 
-v2.0.0 - 2026-02-19
--------------------
+## v3.0.0 - 2026-08-20
+
+- **BREAKING CHANGE**: Dropped support for Ruby 3.2 and 3.3 (EOL as of March 31, 2026)
+- Updated minimum Ruby version requirement from >= 3.2 to >= 3.4
+- Added support for Ruby 4.0; CI now tests against Ruby 3.4, and 4.0
+- Dependencies updates
+
+## v2.0.0 - 2026-02-19
+
 - **BREAKING CHANGE**: Dropped support for Ruby 3.1 (EOL as of March 31, 2025)
 - Updated minimum Ruby version requirement from >= 3.1 to >= 3.2
 - This change resolves Dependabot dependency resolution issues with bundler-audit
 - CI now tests against Ruby 3.2, 3.3, and 3.4
 - First major version bump following semantic versioning for breaking changes
 
-v1.2.4 - 2026-02-10
--------------------
+## v1.2.4 - 2026-02-10
+
 - Updated Faraday dependency to >= 2.14.1 to address CVE-2026-25765 (SSRF vulnerability)
 
-v1.2.3 - 2025-07-25
--------------------
+## v1.2.3 - 2025-07-25
+
 - Libraries updates
 
-v1.2.2 - 2024-05-22
--------------------
+## v1.2.2 - 2024-05-22
+
 - Added support for ruby 3.4
 
-v1.2.1 - 2024-02-23
--------------------
+## v1.2.1 - 2024-02-23
+
 - Update cloudflare trusted IP URL to include new required trailing slash
 - Many dependabot bumps
 
-v1.2.0 - 2023-06-05
--------------------
+## v1.2.0 - 2023-06-05
+
 - Set `required_ruby_version` in the gemspec
 - Add `trusted_request_proc` kwarg to DenyOthers middleware
 
-v1.1.0 - 2023-03-31
--------------------
+## v1.1.0 - 2023-03-31
+
 - Expand requirements to allow using Rack 3.x
 - Add `trust_xff_if_private` kwarg to both middlewares
 - Add `on_fail_proc` to DenyOthers middleware
 - Bump various build-time dependencies
 
-v1.0.0 - 2023-03-31
--------------------
+## v1.0.0 - 2023-03-31
+
 - Initial release
