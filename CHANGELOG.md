@@ -2,9 +2,9 @@
 
 ## v3.0.0 - 2026-08-20
 
-- **BREAKING CHANGE**: Dropped support for Ruby 3.2 and 3.3 (EOL as of March 31, 2026)
+- **BREAKING CHANGE**: Dropped support for Ruby 3.2 (EOL 2026-04-01) and Ruby 3.3
 - Updated minimum Ruby version requirement from >= 3.2 to >= 3.4
-- Added support for Ruby 4.0; CI now tests against Ruby 3.4, and 4.0
+- Added support for Ruby 4.0; CI now tests against Ruby 3.4 and 4.0
 - Dependencies updates
 
 ## v2.0.0 - 2026-02-19

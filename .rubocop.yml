@@ -2,8 +2,7 @@ require: standard
 inherit_gem:
   standard: config/base.yml
 AllCops:
-AllCops:
-  TargetRubyVersion: 4.0
+  TargetRubyVersion: 3.4
   NewCops: enable
   Exclude:
     - "vendor/bundle/**/*"

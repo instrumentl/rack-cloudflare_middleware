@@ -6,7 +6,6 @@ repos:
   - id: end-of-file-fixer
     exclude: '^(config/secrets.yml.enc$)|(spec/data/)|(db/.*\.sql$)'
   - id: check-yaml
-    exclude: '.rubocop.yml'
   - id: check-added-large-files
   - id: fix-byte-order-marker
     exclude: '^spec/data/'
